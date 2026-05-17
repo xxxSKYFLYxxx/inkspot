@@ -50,13 +50,13 @@
                         <form method="post" action="{{ url_for('admin_toggle_admin', user_id=u.id) }}">
                             <button class="btn btn-sm {{ 'btn-outline-secondary' if u.is_admin else 'btn-outline-success' }}"
                                     title="{{ 'Снять права' if u.is_admin else 'Назначить админом' }}">
-                                <i class="bi bi-{{ 'shield-x' if u.is_admin else 'shield-plus' }}"></i>
+                                <i class="ti ti-{{ 'shield-x' if u.is_admin else 'shield-plus' }}"></i>
                             </button>
                         </form>
                         <form method="post" action="{{ url_for('admin_delete_user', user_id=u.id) }}"
                               onsubmit="return confirm('Удалить пользователя {{ u.username }}?')">
                             <button class="btn btn-sm btn-outline-danger" title="Удалить">
-                                <i class="bi bi-trash"></i>
+                                <i class="ti ti-trash"></i>
                             </button>
                         </form>
                     </div>

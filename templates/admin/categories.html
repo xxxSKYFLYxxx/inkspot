@@ -22,7 +22,7 @@
                         <div class="form-text">Латиница, цифры, дефис. Используется в URL.</div>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">
-                        <i class="bi bi-plus-lg me-1"></i> Добавить
+                        <i class="ti ti-plus me-1"></i> Добавить
                     </button>
                 </form>
             </div>
@@ -55,7 +55,7 @@
                             <form method="post" action="{{ url_for('admin_delete_category', cat_id=cat.id) }}"
                                   onsubmit="return confirm('Удалить категорию «{{ cat.name }}»? Публикации станут без категории.')">
                                 <button class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="ti ti-trash"></i>
                                 </button>
                             </form>
                         </td>

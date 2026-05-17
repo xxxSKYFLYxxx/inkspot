@@ -6,10 +6,10 @@
 <!-- Stat cards -->
 <div class="row g-3 mb-4">
     {% set cards = [
-        ('Пользователи',  stats.users,     'people-fill',      'primary',  url_for('admin_users')),
-        ('Публикации',    stats.posts,     'file-text-fill',   'success',  url_for('admin_posts')),
-        ('Комментарии',   stats.comments,  'chat-left-fill',   'warning',  url_for('admin_comments')),
-        ('Категории',     stats.categories,'tags-fill',        'info',     url_for('admin_categories')),
+        ('Пользователи',  stats.users,     'ti-users-group',        'primary',  url_for('admin_users')),
+        ('Публикации',    stats.posts,     'ti-article',            'success',  url_for('admin_posts')),
+        ('Комментарии',   stats.comments,  'ti-messages',           'warning',  url_for('admin_comments')),
+        ('Категории',     stats.categories,'ti-tags',               'info',     url_for('admin_categories')),
     ] %}
     {% for label, count, icon, color, link in cards %}
     <div class="col-sm-6 col-xl-3">
@@ -17,7 +17,7 @@
         <div class="card stat-card shadow-sm h-100">
             <div class="card-body d-flex align-items-center gap-3">
                 <div class="icon-box bg-{{ color }} bg-opacity-10 text-{{ color }}">
-                    <i class="bi bi-{{ icon }}"></i>
+                    <i class="ti {{ icon }}"></i>
                 </div>
                 <div>
                     <div class="h4 mb-0 fw-bold">{{ count }}</div>
