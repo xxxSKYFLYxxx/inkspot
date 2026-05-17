@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }} — InkSpot{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <article class="col-lg-8">
+        {% if post.category %}
+            <a href="{{ url_for('index', category=post.category.slug) }}" class="badge bg-light text-primary text-decoration-none mb-3">{{ post.category.name }}</a>
+        {% endif %}
+        <h1 class="display-6 fw-bold mb-3">{{ post.title }}</h1>
+        <div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+            <a href="{{ url_for('profile', username=post.author.username) }}" class="d-flex align-items-center text-decoration-none text-dark">
+                <span class="avatar me-3">{{ post.author.username[0]|upper }}</span>
+                <div>
+                    <strong>{{ post.author.username }}</strong>
+                    <div class="text-muted small">{{ post.created_at.strftime('%d.%m.%Y %H:%M') }} · <i class="bi bi-eye"></i> {{ post.views }}</div>
+                </div>
+            </a>
+            {% if current_user.is_authenticated and current_user.id == post.user_id %}
+                <div>
+                    <a href="{{ url_for('edit_post', post_id=post.id) }}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil"></i> Редактировать</a>
+                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post" class="d-inline" onsubmit="return confirm('Удалить статью?');">
+                        <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Удалить</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if post.image %}
+            <img src="{{ url_for('static', filename='uploads/' ~ post.image) }}" class="img-fluid rounded-4 mb-4" alt="">
+        {% endif %}
+
+        <div class="post-body fs-5 lh-lg">
+            {% for para in post.content.split('\n') %}
+                {% if para.strip() %}<p>{{ para }}</p>{% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="d-flex align-items-center gap-3 my-4 py-3 border-top border-bottom">
+            <form action="{{ url_for('post_like', post_id=post.id) }}" method="post" class="d-inline">
+                <button class="btn {% if current_user.is_authenticated and current_user in post.liked_by %}btn-danger{% else %}btn-outline-danger{% endif %}">
+                    <i class="bi bi-heart{% if current_user.is_authenticated and current_user in post.liked_by %}-fill{% endif %}"></i>
+                    {{ post.liked_by|length }}
+                </button>
+            </form>
+            <span class="text-muted"><i class="bi bi-chat"></i> Комментариев: {{ post.comments|length }}</span>
+        </div>
+
+        <section id="comments">
+            <h3 class="h5 mb-3">Комментарии</h3>
+
+            {% if current_user.is_authenticated %}
+                <form method="post" class="mb-4">
+                    <div class="mb-2">
+                        <textarea name="content" class="form-control" rows="3" placeholder="Поделитесь своим мнением…" required></textarea>
+                    </div>
+                    <button class="btn btn-primary">Отправить</button>
+                </form>
+            {% else %}
+                <p class="text-muted"><a href="{{ url_for('login') }}">Войдите</a>, чтобы оставить комментарий.</p>
+            {% endif %}
+
+            {% for c in post.comments|sort(attribute='created_at', reverse=True) %}
+                <div class="d-flex mb-3">
+                    <span class="avatar me-3">{{ c.author.username[0]|upper }}</span>
+                    <div class="flex-grow-1 bg-light rounded-3 p-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <strong>{{ c.author.username }}</strong>
+                            <small class="text-muted">{{ c.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+                        </div>
+                        <div>{{ c.content }}</div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-muted">Будьте первым, кто оставит комментарий.</p>
+            {% endfor %}
+        </section>
+    </article>
+
+    <aside class="col-lg-4">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body text-center">
+                <span class="avatar avatar-lg mx-auto mb-3">{{ post.author.username[0]|upper }}</span>
+                <h5 class="mb-1">{{ post.author.username }}</h5>
+                <p class="text-muted small">{{ post.author.bio or 'Автор пока не добавил описание.' }}</p>
+                <a href="{{ url_for('profile', username=post.author.username) }}" class="btn btn-outline-primary btn-sm">К профилю</a>
+            </div>
+        </div>
+    </aside>
+</div>
+{% endblock %}

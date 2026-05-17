@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Контакты — InkSpot{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <h1 class="display-6 fw-bold mb-3">Контакты</h1>
+                <p class="text-muted mb-4">Связаться с командой InkSpot можно любым удобным способом — мы отвечаем по будням в течение рабочего дня.</p>
+
+                <div class="contact-item d-flex align-items-center mb-3 p-3 rounded-3 bg-light">
+                    <div class="contact-icon contact-icon-phone me-3">
+                        <img src="{{ url_for('static', filename='img/social/phone.svg') }}" alt="">
+                    </div>
+                    <div>
+                        <div class="text-muted small">Горячая линия</div>
+                        <a href="tel:+78005553535" class="fs-5 fw-semibold text-dark text-decoration-none">+7 (800) 555-35-35</a>
+                    </div>
+                </div>
+
+                <div class="contact-item d-flex align-items-center mb-4 p-3 rounded-3 bg-light">
+                    <div class="contact-icon contact-icon-mail me-3">
+                        <img src="{{ url_for('static', filename='img/social/mail.svg') }}" alt="">
+                    </div>
+                    <div>
+                        <div class="text-muted small">Электронная почта</div>
+                        <a href="mailto:hello@inkspot.ru" class="fs-5 fw-semibold text-dark text-decoration-none">hello@inkspot.ru</a>
+                    </div>
+                </div>
+
+                <h2 class="h5 mt-4 mb-3">Мы в мессенджерах</h2>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="https://max.ru" target="_blank" rel="noopener" class="social-btn" title="Max">
+                        <img src="{{ url_for('static', filename='img/social/max.png') }}" alt="" class="social-icon">
+                        <span>Max</span>
+                    </a>
+                    <a href="https://t.me" target="_blank" rel="noopener" class="social-btn" title="Telegram">
+                        <img src="{{ url_for('static', filename='img/social/telegram.svg') }}" alt="" class="social-icon">
+                        <span>Telegram</span>
+                    </a>
+                    <a href="https://vk.com" target="_blank" rel="noopener" class="social-btn" title="ВКонтакте">
+                        <img src="{{ url_for('static', filename='img/social/vk.svg') }}" alt="" class="social-icon">
+                        <span>ВКонтакте</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

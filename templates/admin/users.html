@@ -1,0 +1,71 @@
+{% extends 'admin/layout.html' %}
+{% block title %}Пользователи{% endblock %}
+{% block page_title %}Пользователи{% endblock %}
+
+{% block content %}
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+        <span class="fw-semibold">Все пользователи ({{ users|length }})</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-3">Пользователь</th>
+                    <th>Email</th>
+                    <th class="text-center">Публикации</th>
+                    <th class="text-center">Роль</th>
+                    <th class="text-center">Регистрация</th>
+                    <th class="text-end pe-3">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for u in users %}
+            <tr>
+                <td class="ps-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
+                             style="width:36px;height:36px;background:linear-gradient(135deg,#2563eb,#7c3aed);font-size:.85rem;flex-shrink:0">
+                            {{ u.username[0]|upper }}
+                        </div>
+                        <div>
+                            <a href="{{ url_for('profile', username=u.username) }}" class="fw-semibold text-dark text-decoration-none">{{ u.username }}</a>
+                            {% if u.id == current_user.id %}<span class="badge bg-secondary ms-1">Вы</span>{% endif %}
+                        </div>
+                    </div>
+                </td>
+                <td class="text-muted small">{{ u.email }}</td>
+                <td class="text-center">{{ u.posts|length }}</td>
+                <td class="text-center">
+                    {% if u.is_admin %}
+                        <span class="badge bg-danger">Администратор</span>
+                    {% else %}
+                        <span class="badge bg-light text-dark border">Пользователь</span>
+                    {% endif %}
+                </td>
+                <td class="text-center text-muted small">{{ u.created_at.strftime('%d.%m.%Y') }}</td>
+                <td class="text-end pe-3">
+                    {% if u.id != current_user.id %}
+                    <div class="d-flex gap-2 justify-content-end">
+                        <form method="post" action="{{ url_for('admin_toggle_admin', user_id=u.id) }}">
+                            <button class="btn btn-sm {{ 'btn-outline-secondary' if u.is_admin else 'btn-outline-success' }}"
+                                    title="{{ 'Снять права' if u.is_admin else 'Назначить админом' }}">
+                                <i class="bi bi-{{ 'shield-x' if u.is_admin else 'shield-plus' }}"></i>
+                            </button>
+                        </form>
+                        <form method="post" action="{{ url_for('admin_delete_user', user_id=u.id) }}"
+                              onsubmit="return confirm('Удалить пользователя {{ u.username }}?')">
+                            <button class="btn btn-sm btn-outline-danger" title="Удалить">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

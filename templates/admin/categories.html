@@ -1,0 +1,86 @@
+{% extends 'admin/layout.html' %}
+{% block title %}Категории{% endblock %}
+{% block page_title %}Категории{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Add category form -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom py-3">
+                <span class="fw-semibold">Добавить категорию</span>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{{ url_for('admin_add_category') }}">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Название</label>
+                        <input type="text" name="name" class="form-control" placeholder="Например: Наука" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Slug</label>
+                        <input type="text" name="slug" class="form-control" placeholder="Например: science" required>
+                        <div class="form-text">Латиница, цифры, дефис. Используется в URL.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-plus-lg me-1"></i> Добавить
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categories table -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom py-3">
+                <span class="fw-semibold">Все категории ({{ categories|length }})</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-3">Название</th>
+                            <th>Slug</th>
+                            <th class="text-center">Публикации</th>
+                            <th class="text-end pe-3">Удалить</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for cat in categories %}
+                    <tr>
+                        <td class="ps-3 fw-semibold">{{ cat.name }}</td>
+                        <td><span class="badge bg-light text-secondary border font-monospace">{{ cat.slug }}</span></td>
+                        <td class="text-center text-muted small">{{ cat.posts|length }}</td>
+                        <td class="text-end pe-3">
+                            <form method="post" action="{{ url_for('admin_delete_category', cat_id=cat.id) }}"
+                                  onsubmit="return confirm('Удалить категорию «{{ cat.name }}»? Публикации станут без категории.')">
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">Категорий пока нет</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Auto-generate slug from name
+document.querySelector('input[name="name"]').addEventListener('input', function () {
+    const slug = this.value
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+    document.querySelector('input[name="slug"]').value = slug;
+});
+</script>
+{% endblock %}

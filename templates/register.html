@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Регистрация — InkSpot{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <h1 class="h3 mb-4 text-center">Создать аккаунт</h1>
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Имя пользователя</label>
+                        <input type="text" name="username" class="form-control" required minlength="3" maxlength="40">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" name="password" class="form-control" required minlength="6">
+                        <div class="form-text">Не короче 6 символов.</div>
+                    </div>
+                    <button class="btn btn-primary w-100 py-2">Зарегистрироваться</button>
+                </form>
+                <hr class="my-4">
+                <p class="text-center mb-0 text-muted small">Уже зарегистрированы? <a href="{{ url_for('login') }}">Войти</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}О проекте — InkSpot{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 p-md-5">
+                <h1 class="display-6 fw-bold mb-3">О платформе InkSpot</h1>
+                <p class="lead text-muted mb-4">InkSpot — учебный проект: лёгкая платформа для блогинга и публикации контента, разработанная в рамках курсовой работы.</p>
+
+                <h2 class="h5 mt-4 mb-3">Возможности</h2>
+                <ul class="mb-4">
+                    <li class="mb-1">Регистрация и авторизация пользователей.</li>
+                    <li class="mb-1">Создание, редактирование и удаление статей с обложкой.</li>
+                    <li class="mb-1">Категории, поиск, постраничная навигация.</li>
+                    <li class="mb-1">Лайки и комментарии.</li>
+                    <li class="mb-1">Личный профиль с аватаром и описанием.</li>
+                </ul>
+
+                <h2 class="h5 mt-4 mb-3">Технологии</h2>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge bg-light text-dark border px-3 py-2">Python 3</span>
+                    <span class="badge bg-light text-dark border px-3 py-2">Flask</span>
+                    <span class="badge bg-light text-dark border px-3 py-2">SQLAlchemy</span>
+                    <span class="badge bg-light text-dark border px-3 py-2">SQLite</span>
+                    <span class="badge bg-light text-dark border px-3 py-2">HTML5</span>
+                    <span class="badge bg-light text-dark border px-3 py-2">CSS3</span>
+                    <span class="badge bg-light text-dark border px-3 py-2">JavaScript</span>
+                    <span class="badge bg-light text-dark border px-3 py-2">Bootstrap 5</span>
+                </div>
+
+                <h2 class="h5 mt-4 mb-3">Архитектура</h2>
+                <p class="text-muted mb-0">Приложение построено по схеме MTV (Model–Template–View): модели описаны через SQLAlchemy, представления реализуются маршрутами Flask, шаблоны — на Jinja2. Хранение данных — SQLite (для разработки) с возможностью перехода на PostgreSQL.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

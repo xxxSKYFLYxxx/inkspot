@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}{{ user.username }} — InkSpot{% endblock %}
+
+{% block content %}
+<div class="profile-header card border-0 shadow-sm mb-4">
+    <div class="card-body p-4 p-md-5">
+        <div class="row align-items-center g-4">
+            <div class="col-md-2 text-center">
+                {% if user.avatar %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ user.avatar) }}" class="rounded-circle profile-avatar" alt="">
+                {% else %}
+                    <span class="avatar avatar-xl mx-auto">{{ user.username[0]|upper }}</span>
+                {% endif %}
+            </div>
+            <div class="col-md-7">
+                <h1 class="h3 mb-1">{{ user.username }}</h1>
+                <p class="text-muted mb-2">На InkSpot с {{ user.created_at.strftime('%B %Y') }}</p>
+                <p class="mb-0">{{ user.bio or 'Автор пока не добавил описание.' }}</p>
+            </div>
+            <div class="col-md-3 text-md-end">
+                <div class="d-flex justify-content-md-end justify-content-start gap-4 mb-2">
+                    <div><strong class="d-block fs-4">{{ posts|length }}</strong><span class="text-muted small">статей</span></div>
+                    <div><strong class="d-block fs-4">{{ user.comments|length }}</strong><span class="text-muted small">комм.</span></div>
+                </div>
+                {% if current_user.is_authenticated and current_user.id == user.id %}
+                    <a href="{{ url_for('profile_edit') }}" class="btn btn-outline-primary btn-sm"><i class="bi bi-gear"></i> Настройки</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="h4 mb-3">Публикации</h2>
+{% if posts %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for post in posts %}
+        <div class="col">
+            <article class="card h-100 post-card border-0 shadow-sm">
+                {% if post.image %}
+                    <a href="{{ url_for('post_detail', post_id=post.id) }}">
+                        <img src="{{ url_for('static', filename='uploads/' ~ post.image) }}" class="card-img-top post-thumb" alt="">
+                    </a>
+                {% endif %}
+                <div class="card-body">
+                    {% if post.category %}
+                        <span class="badge bg-light text-primary mb-2">{{ post.category.name }}</span>
+                    {% endif %}
+                    <h5><a class="text-dark text-decoration-none" href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h5>
+                    <p class="text-muted small mb-2">{{ post.created_at.strftime('%d.%m.%Y') }}</p>
+                    <p class="text-muted">{{ post.excerpt(120) }}</p>
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="text-muted">Пока нет публикаций.</p>
+{% endif %}
+{% endblock %}
