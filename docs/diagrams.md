@@ -1,15 +1,15 @@
 # Код диаграмм для курсового проекта InkSpot
 
-Вставляй блоки в нужные редакторы. Где есть оба варианта (Mermaid и PlantUML) — бери тот, который удобнее.
+Вставляй блоки в нужные редакторы. Где есть оба варианта (Mermaid и PlantUML) – бери тот, который удобнее.
 
-- **Mermaid** → [mermaid.live](https://mermaid.live) — экспорт PNG/SVG
-- **PlantUML** → [plantuml.com/plantuml](https://www.plantuml.com/plantuml/uml) — экспорт PNG/SVG
-- **DBML (ER)** → [dbdiagram.io](https://dbdiagram.io) — экспорт PNG/SVG/PDF
-- **draw.io** → [app.diagrams.net](https://app.diagrams.net) — для BPMN с правильной нотацией
+- **Mermaid** → [mermaid.live](https://mermaid.live) – экспорт PNG/SVG
+- **PlantUML** → [plantuml.com/plantuml](https://www.plantuml.com/plantuml/uml) – экспорт PNG/SVG
+- **DBML (ER)** → [dbdiagram.io](https://dbdiagram.io) – экспорт PNG/SVG/PDF
+- **draw.io** → [app.diagrams.net](https://app.diagrams.net) – для BPMN с правильной нотацией
 
 ---
 
-## Рис. 1 — BPMN «как есть» (публикация контента вручную)
+## Рис. 1 – BPMN «как есть» (публикация контента вручную)
 
 ### Mermaid
 
@@ -34,7 +34,7 @@ flowchart LR
 
 ---
 
-## Рис. 2 — BPMN «как будет» (через InkSpot)
+## Рис. 2 – BPMN «как будет» (через InkSpot)
 
 ### Mermaid
 
@@ -63,9 +63,9 @@ flowchart LR
 
 ---
 
-## Рис. 3 — UML Use Case
+## Рис. 3 – UML Use Case
 
-### PlantUML (рекомендуется — выглядит как настоящий Use Case)
+### PlantUML (рекомендуется – выглядит как настоящий Use Case)
 
 ```plantuml
 @startuml
@@ -149,9 +149,9 @@ flowchart LR
 
 ---
 
-## Рис. 4 — ER-диаграмма
+## Рис. 4 – ER-диаграмма
 
-### DBML для dbdiagram.io (рекомендуется — самая красивая)
+### DBML для dbdiagram.io (рекомендуется – самая красивая)
 
 ```dbml
 Table user {
@@ -246,7 +246,7 @@ erDiagram
 
 ---
 
-## Рис. 6 — Архитектура приложения
+## Рис. 6 – Архитектура приложения
 
 ### Mermaid
 
@@ -289,7 +289,7 @@ flowchart TB
 
 ---
 
-## Рис. 13 — Схема навигации сайта
+## Рис. 13 – Схема навигации сайта
 
 ### Mermaid
 
@@ -346,7 +346,7 @@ flowchart TB
 
 ## Что делать с этими блоками
 
-1. **Mermaid** — открой [mermaid.live](https://mermaid.live), вставь код, нажми **Actions → PNG/SVG**, сохрани в `docs/img/`.
-2. **PlantUML** — открой [plantuml.com/plantuml](https://www.plantuml.com/plantuml/uml), вставь, скачай PNG.
-3. **DBML** — открой [dbdiagram.io](https://dbdiagram.io), создай новый Diagram, вставь DBML, **Export → PNG**.
-4. После того как PNG'и готовы, кинь их сюда — вставлю в `.docx` вместо серых плейсхолдеров.
+1. **Mermaid** – открой [mermaid.live](https://mermaid.live), вставь код, нажми **Actions → PNG/SVG**, сохрани в `docs/img/`.
+2. **PlantUML** – открой [plantuml.com/plantuml](https://www.plantuml.com/plantuml/uml), вставь, скачай PNG.
+3. **DBML** – открой [dbdiagram.io](https://dbdiagram.io), создай новый Diagram, вставь DBML, **Export → PNG**.
+4. После того как PNG'и готовы, кинь их сюда – вставлю в `.docx` вместо серых плейсхолдеров.

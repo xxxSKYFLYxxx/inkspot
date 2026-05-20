@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{% if post %}Редактировать{% else %}Новая статья{% endif %} — InkSpot{% endblock %}
+{% block title %}{% if post %}Редактировать{% else %}Новая статья{% endif %} – InkSpot{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -16,7 +16,7 @@
                     <div class="col-md-6">
                         <label class="form-label">Категория</label>
                         <select name="category_id" class="form-select">
-                            <option value="">— Без категории —</option>
+                            <option value="">– Без категории –</option>
                             {% for cat in categories %}
                                 <option value="{{ cat.id }}" {% if post and post.category_id == cat.id %}selected{% endif %}>{{ cat.name }}</option>
                             {% endfor %}
