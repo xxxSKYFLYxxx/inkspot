@@ -208,7 +208,7 @@ def create_post():
 @login_required
 def edit_post(post_id):
     post = Post.query.get_or_404(post_id)
-    if post.user_id != current_user.id:
+    if post.user_id != current_user.id and not current_user.is_admin:
         abort(403)
     if request.method == 'POST':
         post.title = request.form.get('title', '').strip()
