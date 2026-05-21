@@ -33,8 +33,11 @@
                     <li class="nav-item"><a class="btn btn-primary btn-sm px-3" href="{{ url_for('create_post') }}"><i class="bi bi-pencil-square"></i> Написать</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" href="#">
-                            {% from '_macros.html' import avatar %}
-                            {{ avatar(current_user, 'avatar-sm me-2') }}
+                            {% if current_user.avatar %}
+                                <img src="{{ url_for('static', filename='uploads/' ~ current_user.avatar) }}" class="avatar avatar-sm me-2 avatar-img" alt="">
+                            {% else %}
+                                <span class="avatar avatar-sm me-2">{{ current_user.username[0]|upper }}</span>
+                            {% endif %}
                             {{ current_user.username }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">

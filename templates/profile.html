@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% from '_macros.html' import avatar %}
 {% block title %}{{ user.username }} – InkSpot{% endblock %}
 
 {% block content %}
@@ -7,7 +6,11 @@
     <div class="card-body p-4 p-md-5">
         <div class="row align-items-center g-4">
             <div class="col-md-2 text-center">
-                {{ avatar(user, 'avatar-xl mx-auto') }}
+                {% if user.avatar %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ user.avatar) }}" class="avatar avatar-xl mx-auto avatar-img" alt="">
+                {% else %}
+                    <span class="avatar avatar-xl mx-auto">{{ user.username[0]|upper }}</span>
+                {% endif %}
             </div>
             <div class="col-md-7">
                 <h1 class="h3 mb-1">{{ user.username }}</h1>
