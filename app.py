@@ -317,7 +317,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-# ─── Admin Panel ──────────────────────────────────────────────────────────────
+#Admin Panel
 
 @app.route('/admin')
 @login_required
