@@ -1,0 +1,9 @@
+{# Render a user avatar: photo if uploaded, otherwise gradient letter circle. #}
+{% macro avatar(user, size='') -%}
+{%- set cls = ('avatar ' ~ size).strip() -%}
+{%- if user.avatar -%}
+    <img src="{{ url_for('static', filename='uploads/' ~ user.avatar) }}" class="{{ cls }} avatar-img" alt="">
+{%- else -%}
+    <span class="{{ cls }}">{{ user.username[0]|upper }}</span>
+{%- endif -%}
+{%- endmacro %}

@@ -93,6 +93,7 @@ a:hover { color: #1d4ed8; }
 .avatar-sm { width: 28px; height: 28px; font-size: .8rem; }
 .avatar-lg { width: 72px; height: 72px; font-size: 1.8rem; display: flex; }
 .avatar-xl { width: 110px; height: 110px; font-size: 2.6rem; display: flex; }
+img.avatar, img.avatar-img { object-fit: cover; background: #e5e7eb; display: inline-block; }
 
 .post-card {
     transition: transform .25s ease, box-shadow .25s ease;

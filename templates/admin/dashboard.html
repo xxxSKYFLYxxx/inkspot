@@ -45,10 +45,16 @@
                     <tr>
                         <td class="ps-3">
                             <div class="d-flex align-items-center gap-2">
-                                <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
-                                     style="width:32px;height:32px;background:linear-gradient(135deg,#1e293b,#3730a3);font-size:.8rem;flex-shrink:0">
-                                    {{ u.username[0]|upper }}
-                                </div>
+                                {% if u.avatar %}
+                                    <img src="{{ url_for('static', filename='uploads/' ~ u.avatar) }}"
+                                         class="rounded-circle avatar-img" alt=""
+                                         style="width:32px;height:32px;flex-shrink:0;">
+                                {% else %}
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold"
+                                         style="width:32px;height:32px;background:linear-gradient(135deg,#1e293b,#3730a3);font-size:.8rem;flex-shrink:0">
+                                        {{ u.username[0]|upper }}
+                                    </div>
+                                {% endif %}
                                 <div>
                                     <div class="fw-semibold small">{{ u.username }}</div>
                                     <div class="text-muted" style="font-size:.75rem">{{ u.email }}</div>
