@@ -19,8 +19,14 @@
             </div>
             <div class="col-md-3 text-md-end">
                 <div class="d-flex justify-content-md-end justify-content-start gap-4 mb-2">
-                    <div><strong class="d-block fs-4">{{ posts|length }}</strong><span class="text-muted small">статей</span></div>
-                    <div><strong class="d-block fs-4">{{ user.comments|length }}</strong><span class="text-muted small">комм.</span></div>
+                    <div class="text-center" style="min-width:60px;">
+                        <strong class="d-block fs-4 lh-1">{{ posts|length }}</strong>
+                        <span class="text-muted small">статей</span>
+                    </div>
+                    <div class="text-center" style="min-width:60px;">
+                        <strong class="d-block fs-4 lh-1">{{ user.comments|length }}</strong>
+                        <span class="text-muted small">комм.</span>
+                    </div>
                 </div>
                 {% if current_user.is_authenticated and current_user.id == user.id %}
                     <a href="{{ url_for('profile_edit') }}" class="btn btn-outline-primary btn-sm"><i class="bi bi-gear"></i> Настройки</a>
