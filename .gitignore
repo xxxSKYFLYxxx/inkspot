@@ -10,3 +10,10 @@ node_modules/
 *.docx
 *.log
 .claude/
+
+# Coursework artifacts (kept locally, not in repo)
+diagrams/
+docs/
+generate_docx.js
+package.json
+package-lock.json
