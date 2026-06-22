@@ -11,6 +11,16 @@ body {
     color: var(--ink-text);
 }
 
+body:not(.admin-body) {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
 .navbar {
     backdrop-filter: saturate(180%) blur(10px);
 }
