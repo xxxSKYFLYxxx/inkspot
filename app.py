@@ -12,8 +12,12 @@ UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
 app = Flask(__name__)
+database_url = os.environ.get('DATABASE_URL')
+if database_url and database_url.startswith('postgres://'):
+    database_url = database_url.replace('postgres://', 'postgresql://', 1)
+
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-me-in-production-please')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'blog.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url or ('sqlite:///' + os.path.join(BASE_DIR, 'blog.db'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
@@ -479,15 +483,19 @@ def seed():
         db.session.commit()
 
 
-with app.app_context():
+def init_database():
     db.create_all()
-    # Add is_admin column if DB was created before this field existed
+    # Legacy SQLite instances may not have this column yet.
     try:
-        db.session.execute(db.text('ALTER TABLE user ADD COLUMN is_admin BOOLEAN DEFAULT 0'))
+        db.session.execute(db.text('ALTER TABLE "user" ADD COLUMN is_admin BOOLEAN DEFAULT FALSE'))
         db.session.commit()
     except Exception:
-        pass
+        db.session.rollback()
     seed()
+
+
+with app.app_context():
+    init_database()
 
 
 if __name__ == '__main__':
