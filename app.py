@@ -15,6 +15,8 @@ app = Flask(__name__)
 database_url = os.environ.get('DATABASE_URL')
 if database_url and database_url.startswith('postgres://'):
     database_url = database_url.replace('postgres://', 'postgresql://', 1)
+if database_url and database_url.startswith('postgresql://') and '+psycopg' not in database_url:
+    database_url = database_url.replace('postgresql://', 'postgresql+psycopg://', 1)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-me-in-production-please')
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url or ('sqlite:///' + os.path.join(BASE_DIR, 'blog.db'))
